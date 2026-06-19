@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le bloc "title" peut être surchargé par les templates enfants -->
+    <title>{% block title %}Mon App Flask{% endblock %}</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        nav a { margin-right: 15px; text-decoration: none; color: #333; font-weight: bold; }
+        nav { border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-bottom: 20px; }
+        .flash-success { color: green; }
+        .flash-info    { color: steelblue; }
+        .flash-warning { color: orange; }
+        .error { color: red; font-size: 0.85em; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="{{ url_for('main.index') }}">Accueil</a>
+        <a href="{{ url_for('tasks.index') }}">Mes tâches</a>
+    </nav>
+
+    <!-- Affichage des messages flash (notifications) -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <p class="flash-{{ category }}">{{ message }}</p>
+        {% endfor %}
+    {% endwith %}
+
+    <!-- Le bloc "content" est rempli par chaque template enfant -->
+    {% block content %}{% endblock %}
+
+    
+
+</body>
+</html>
