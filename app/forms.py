@@ -1,17 +1,39 @@
-# Les formulaires Flask-WTF combinent la définition du formulaire HTML
-# et la validation des données côté serveur en un seul endroit.
-
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired, Length
+from wtforms import StringField, PasswordField, SubmitField
+from wtforms.validators import DataRequired, Email, Length, EqualTo
 
+class RegisterForm(FlaskForm):
 
-class TaskForm(FlaskForm):
-    # DataRequired : le champ ne peut pas être vide
-    # Length : le titre doit faire entre 3 et 100 caractères
-    title = StringField(
-        "Titre de la tâche",
-        validators=[DataRequired(message="Le titre est obligatoire."),
-                    Length(min=3, max=100)]
+    username = StringField(
+        "Username",
+        validators=[
+            DataRequired(),
+            Length(min=3, max=30)
+        ]
     )
-    submit = SubmitField("Ajouter la tâche")
+
+    email = StringField(
+        "Email",
+        validators=[
+            DataRequired(),
+            Email()
+        ]
+    )
+
+    password = PasswordField(
+        "Password",
+        validators=[
+            DataRequired(),
+            Length(min=6)
+        ]
+    )
+
+    confirm_password = PasswordField(
+        "Confirm Password",
+        validators=[
+            DataRequired(),
+            EqualTo("password")
+        ]
+    )
+
+    submit = SubmitField("Create Account")

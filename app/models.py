@@ -25,7 +25,7 @@ class User(db.Model, UserMixin):
     habits = db.relationship(
         'Habit',
         backref='User',
-        lazt=True,
+        lazy=True,
         cascade="all, delete-orphan"
     )
 
