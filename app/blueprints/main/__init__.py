@@ -5,4 +5,4 @@ from flask import Blueprint
 
 main_bp = Blueprint("main", __name__, template_folder="../../templates")
 
-from . import routes  # noqa : import nécessaire pour enregistrer les routes
+from ... import routes  # noqa : import nécessaire pour enregistrer les routes

@@ -64,7 +64,7 @@ class Goal(db.Model):
 class Habit(db.Model):
     __tablename__ = 'habits'
 
-    id = db.Column(db.Integer, primari_key=True)
+    id = db.Column(db.Integer, primary_key=True)
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     goal_id = db.Column(db.Integer, db.ForeignKey('goals.id'), nullable=False)
